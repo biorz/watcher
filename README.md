@@ -2,7 +2,7 @@
 
 ------
 
-监听元素进出视口，跳转至指定元素位置 [demo](https://github.com/biorz/watcher/blob/master/demo/index.html)
+监听元素进出视口，跳转至指定元素位置 [demo](https://biorz.github.io/watcher/demo/index.html)
 
 > * 无依赖
 > * 简明的api
