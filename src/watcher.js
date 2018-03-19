@@ -1,6 +1,6 @@
 import emit from "./emit";
-import { RAF, tween } from "./animate";
 import { getOffset, getScrollParent } from "./dom";
+import { itera, RAF, tween } from "./utils";
 
 const group = { interval: 1000 / 60, list: [] };
 
@@ -102,8 +102,8 @@ class watcher extends emit {
     });
 
     this.elements.forEach(element => {
-      (function itera(el) {
-        if (!(parent = getScrollParent(el))) return;
+      itera(el => {
+        if (!(parent = getScrollParent(el))) return false;
 
         if (!~history.indexOf(parent)) {
           history.push(parent);
@@ -111,9 +111,9 @@ class watcher extends emit {
             self.check();
           });
 
-          itera(parent);
+          return parent;
         }
-      })(element);
+      }, element);
     });
   }
 
@@ -180,14 +180,13 @@ class watcher extends emit {
     this.vh = window.innerHeight;
     this.vs = this.vw * this.vh;
 
-    let offset = this.getOffset(this.vw, this.vh);
     this.vp = {
-      top: offset.top,
-      right: this.vw - offset.right,
-      bottom: this.vh - offset.bottom,
-      left: offset.left,
-      width: this.vw - offset.left - offset.right,
-      height: this.vh - offset.top - offset.bottom
+      top: 0,
+      right: this.vw,
+      bottom: this.vh,
+      left: 0,
+      width: this.vw,
+      height: this.vh
     };
   }
 
@@ -213,31 +212,31 @@ class watcher extends emit {
     let history = [],
       parent = null,
       rect = element.getBoundingClientRect(),
+      rect2,
       scroll,
       self = this;
 
-    (function itera(el) {
+    itera(el => {
       if (!(parent = getScrollParent(el))) {
-        scroll = self.getScroll(rect, self.vp, self.html);
-        return history.push(scroll);
+        rect2 = self.getOffset(rect, self.vp)
+        scroll = self.getScroll(rect, rect2, self.html);
+        history.push(scroll);
+        return false;
       }
 
-      let r1 = rect,
-        r2 = parent.getBoundingClientRect();
-
-      scroll = self.getScroll(r1, r2, parent);
+      rect2 = parent.getBoundingClientRect();
+      scroll = self.getScroll(rect, rect2, parent);
 
       rect = {
         top: scroll.offset[1],
         left: scroll.offset[0],
-        width: r1.width,
-        height: r1.height
+        width: rect.width,
+        height: rect.height
       };
 
       history.push(scroll);
-
-      itera(parent);
-    })(element);
+      return parent;
+    }, element);
 
     history.forEach(scroll => {
       let wrapper = scroll.element,
@@ -248,49 +247,58 @@ class watcher extends emit {
 
       if (!time) {
         wrapper.scroll(dist[0], dist[1]);
-        end();
-      } else {
-        [0, 1].forEach(i => {
-          let t = 0,
-            timer;
-
-          timer = RAF(function step() {
-            wrapper[axis.scrollOffset[i]] = tween.quad.easeInOut(
-              t,
-              start[1 - i],
-              distance[1 - i],
-              time
-            );
-            t += 1000 / 60;
-
-            if (
-              t >= time ||
-              (dist[1 - i] <= 0 && start[1 - i] <= 0) ||
-              (dist[1 - i] >= max[1 - i] && start[1 - i] >= max[1 - i])
-            )
-              return end();
-            timer = RAF(step);
-          });
-        });
+        return end();
       }
+
+      [0, 1].forEach(i => {
+        let t = 0,
+          timer;
+
+        timer = RAF(function step() {
+          wrapper[axis.scrollOffset[i]] = tween.quad.easeInOut(
+            t,
+            start[1 - i],
+            distance[1 - i],
+            time
+          );
+          t += 1000 / 60;
+
+          if (
+            t >= time ||
+            (dist[1 - i] <= 0 && start[1 - i] <= 0) ||
+            (dist[1 - i] >= max[1 - i] && start[1 - i] >= max[1 - i])
+          )
+            return end();
+          timer = RAF(step);
+        });
+      });
     });
   }
 
-  getScroll(r1, r2, element) {
+  getScroll(rect, rect2, element) {
     let start = [],
       dist = [],
       max = [],
       distance = [],
-      offset = [];
+      offset = [],
+      scrollLength,
+      scrollOffset,
+      top,
+      begin,
+      side;
 
     [0, 1].forEach(i => {
-      max[i] = element[axis.scrollLength[1 - i]] - r2[axis.side[1 - i]];
-      offset[i] =
-        r2[axis.start[1 - i]] +
-        (this.isEnd ? r2[axis.side[1 - i]] - r1[axis.side[1 - i]] : 0);
-      start[i] = element[axis.scrollOffset[1 - i]];
-      distance[i] = r1[axis.start[1 - i]] - offset[i];
-      dist[i] = element[axis.scrollOffset[1 - i]] + distance[i];
+      begin = axis.start[1 - i];
+      side = axis.side[1 - i];
+      scrollLength = element[axis.scrollLength[1 - i]];
+      scrollOffset = element[axis.scrollOffset[1 - i]];
+      top = this.isEnd ? rect2[side] - rect[side] : 0;
+
+      start[i] = scrollOffset;
+      offset[i] = rect2[begin] + top;
+      distance[i] = rect[begin] - offset[i];
+      dist[i] = scrollOffset + distance[i];
+      max[i] = scrollLength - rect2[side];
 
       if (dist[i] > max[i]) {
         distance[i] -= dist[i] - max[i];
@@ -309,10 +317,10 @@ class watcher extends emit {
     };
   }
 
-  getOffset(width, height, dir) {
+  getOffset(rect, rect2) {
     const threshold = {
-      width: this.options.threshold * width,
-      height: this.options.threshold * height
+      width: this.options.threshold * rect.width,
+      height: this.options.threshold * rect.height
     };
 
     const offset = {
@@ -322,7 +330,11 @@ class watcher extends emit {
       left: this.options.offset.left + threshold.width
     };
 
-    return dir !== undefined ? offset[dir] : offset;
+    let rst = Object.assign({}, rect2)
+    for (let k in offset) {
+      rst[k] += offset[k]
+    }
+    return rst;
   }
 
   sortBy(arr) {
@@ -359,16 +371,22 @@ class watcher extends emit {
   inView(element) {
     let parent,
       rect = element.getBoundingClientRect(),
+      rect2,
       self = this;
 
-    (function itera(el) {
-      if (!rect) return;
-      if (!(parent = getScrollParent(el)))
-        return (rect = getOffset(rect, self.vp));
+    itera(el => {
+      if (!rect) return false;
+  
+      if (!(parent = getScrollParent(el))) {
+        rect2 = self.getOffset(rect, self.vp)
+        rect = getOffset(rect, rect2);
+        return false;
+      }
 
-      rect = getOffset(rect, parent.getBoundingClientRect());
-      return itera(parent);
-    })(element);
+      rect2 = parent.getBoundingClientRect();
+      rect = getOffset(rect, rect2);
+      return parent;
+    }, element);
 
     if (rect) {
       let raw = element.getBoundingClientRect();
@@ -376,6 +394,7 @@ class watcher extends emit {
       rect.size = rect.width * rect.height;
       rect.element = element;
     }
+
     return rect;
   }
 }

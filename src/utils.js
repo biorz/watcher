@@ -1,10 +1,22 @@
-let RAF =
+export let itera = (fn, first) => {
+  let itera = (para) => {
+    let rst = fn(para);
+
+    if(rst !== false) {
+      return itera(rst)
+    }
+    return false
+  }
+  return itera(first)
+}
+
+export let RAF =
   window.requestAnimationFrame ||
   function(fn) {
     setTimeout(fn, 1000 / 60);
   };
 
-let tween = {
+export let tween = {
   linear(t, b, c, d) {
     return t / d * c + b;
   },
@@ -21,10 +33,4 @@ let tween = {
       return -c / 2 * (--t * (t - 2) - 1) + b;
     }
   }
-};
-
-export { 
-  RAF, 
-  
-  tween 
 };
