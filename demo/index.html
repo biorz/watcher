@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en" style="max-width: 375px; font-size: 50px;">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>index-list</title>
+
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="./css/flight.city.list.css">
+  <script src="../lib/watcher.min.js"></script>
+</head>
+
+<body style="font-size: .28rem;">
+
+  <div class="city_container">
+    <div class="page_location_name page_location_name_special">定位/历史城市</div>
+    <ul class="firstLetter_container">
+      <li class="lishi">历史</li>
+      <li>热门</li>
+      <li class="xy_flex">A</li>
+      <li class="xy_flex">B</li>
+      <li class="xy_flex">C</li>
+      <li class="xy_flex">D</li>
+      <li class="xy_flex">E</li>
+      <li class="xy_flex">F</li>
+      <li class="xy_flex">G</li>
+      <li class="xy_flex">H</li>
+      <li class="xy_flex">J</li>
+      <li class="xy_flex">K</li>
+      <li class="xy_flex">L</li>
+      <li class="xy_flex">M</li>
+      <li class="xy_flex">N</li>
+      <li class="xy_flex">P</li>
+      <li class="xy_flex">Q</li>
+      <li class="xy_flex">R</li>
+      <li class="xy_flex">S</li>
+      <li class="xy_flex">T</li>
+      <li class="xy_flex">W</li>
+      <li class="xy_flex">X</li>
+      <li class="xy_flex">Y</li>
+      <li class="xy_flex">Z</li>
+    </ul>
+    <div class="city_list_container">
+      <ul class="hot_city_container clearfix">
+        <li></li>
+        <li class="location_city square_item xy_flex left">
+          <span class="loaction_icon"></span>上海</li>
+        <li class="location_city square_item xy_flex left">
+          <!---->北京</li>
+      </ul>
+      <div class="hot_city_container clearfix">
+        <div class="page_location_name hot located">热门城市</div>
+        <div class="square_item xy_flex left">上海</div>
+        <div class="square_item xy_flex left">北京</div>
+        <div class="square_item xy_flex left">成都</div>
+        <div class="square_item xy_flex left">三亚</div>
+        <div class="square_item xy_flex left">广州</div>
+        <div class="square_item xy_flex left">西安</div>
+        <div class="square_item xy_flex left">重庆</div>
+        <div class="square_item xy_flex left">昆明</div>
+        <div class="square_item xy_flex left">厦门</div>
+      </div>
+      <ul class="all_city_container">
+        <ul class="city_firstLetter_item">
+          <li class="page_location_name located a">A</li>
+          <li class="city_item">阿勒泰</li>
+          <li class="city_item">安康</li>
+          <li class="city_item">阿克苏</li>
+          <li class="city_item">鞍山</li>
+          <li class="city_item">安庆</li>
+          <li class="city_item">安顺</li>
+          <li class="city_item">阿拉善左旗</li>
+          <li class="city_item">阿里</li>
+          <li class="city_item">阿拉善右旗</li>
+          <li class="city_item">阿尔山</li>
+        </ul>
+        <ul class="city_firstLetter_item">
+          <li class="page_location_name located b">B</li>
+          <li class="city_item">百色</li>
+          <li class="city_item">包头</li>
+          <li class="city_item">毕节</li>
+          <li class="city_item">北海</li>
+          <li class="city_item">博乐</li>
+          <li class="city_item">保山</li>
+          <li class="city_item">白城</li>
+          <li class="city_item">北京</li>
+          <li class="city_item">巴彦淖尔</li>
+        </ul>
+        <ul class="city_firstLetter_item">
+          <li class="page_location_name located c">C</li>
+          <li class="city_item">昌都</li>
+          <li class="city_item">承德</li>
+          <li class="city_item">常德</li>
+          <li class="city_item">长春</li>
+          <li class="city_item">朝阳</li>
+          <li class="city_item">赤峰</li>
+          <li class="city_item">长治</li>
+          <li class="city_item">重庆</li>
+          <li class="city_item">长海</li>
+          <li class="city_item">长沙</li>
+          <li class="city_item">成都</li>
+          <li class="city_item">常州</li>
+          <li class="city_item">池州</li>
+          <li class="city_item">长白山</li>
+        </ul>
+        <ul class="city_firstLetter_item">
+          <li class="page_location_name located d">D</li>
+          <li class="city_item">大同</li>
+          <li class="city_item">达州</li>
+          <li class="city_item">稻城</li>
+          <li class="city_item">丹东</li>
+          <li class="city_item">迪庆(香格里拉)</li>
+          <li class="city_item">大连</li>
+          <li class="city_item">大理</li>
+          <li class="city_item">敦煌</li>
+          <li class="city_item">东营</li>
+          <li class="city_item">大庆</li>
+          <li class="city_item">德令哈</li>
+        </ul>
+        <ul class="city_firstLetter_item">
+          <li class="page_location_name located e">E</li>
+          <li class="city_item">鄂尔多斯</li>
+          <li class="city_item">额济纳旗</li>
+          <li class="city_item">恩施</li>
+          <li class="city_item">二连浩特</li>
+        </ul>
+        <ul class="city_firstLetter_item">
+          <li class="page_location_name located f">F</li>
+          <li class="city_item">福州</li>
+          <li class="city_item">阜阳</li>
+          <li class="city_item">佛山</li>
+          <li class="city_item">抚远</li>
+          <li class="city_item">富蕴</li>
+        </ul>
+        <ul class="city_firstLetter_item">
+          <li class="page_location_name located g">G</li>
+          <li class="city_item">广州</li>
+          <li class="city_item">广汉</li>
+          <li class="city_item">格尔木</li>
+          <li class="city_item">广元</li>
+          <li class="city_item">固原</li>
+          <li class="city_item">赣州</li>
+          <li class="city_item">贵阳</li>
+          <li class="city_item">桂林</li>
+        </ul>
+        <ul class="city_firstLetter_item">
+          <li class="page_location_name located h">H</li>
+          <li class="city_item">红原</li>
+          <li class="city_item">海口</li>
+          <li class="city_item">河池</li>
+          <li class="city_item">邯郸</li>
+          <li class="city_item">黑河</li>
+          <li class="city_item">呼和浩特</li>
+          <li class="city_item">合肥</li>
+          <li class="city_item">杭州</li>
+          <li class="city_item">淮安</li>
+          <li class="city_item">怀化</li>
+          <li class="city_item">海拉尔</li>
+          <li class="city_item">哈密</li>
+          <li class="city_item">衡阳</li>
+          <li class="city_item">哈尔滨</li>
+          <li class="city_item">和田</li>
+          <li class="city_item">花土沟</li>
+          <li class="city_item">惠州</li>
+          <li class="city_item">汉中</li>
+          <li class="city_item">黄山</li>
+        </ul>
+        <ul class="city_firstLetter_item">
+          <li class="page_location_name located j">J</li>
+          <li class="city_item">且末</li>
+          <li class="city_item">景德镇</li>
+          <li class="city_item">加格达奇</li>
+          <li class="city_item">嘉峪关</li>
+          <li class="city_item">井冈山</li>
+          <li class="city_item">金昌</li>
+          <li class="city_item">九江</li>
+          <li class="city_item">佳木斯</li>
+          <li class="city_item">济宁</li>
+          <li class="city_item">锦州</li>
+          <li class="city_item">鸡西</li>
+          <li class="city_item">九寨沟</li>
+          <li class="city_item">荆州</li>
+          <li class="city_item">揭阳</li>
+          <li class="city_item">济南</li>
+        </ul>
+        <ul class="city_firstLetter_item">
+          <li class="page_location_name located k">K</li>
+          <li class="city_item">库车</li>
+          <li class="city_item">康定</li>
+          <li class="city_item">喀什</li>
+          <li class="city_item">凯里</li>
+          <li class="city_item">喀纳斯</li>
+          <li class="city_item">昆明</li>
+          <li class="city_item">库尔勒</li>
+          <li class="city_item">克拉玛依</li>
+        </ul>
+        <ul class="city_firstLetter_item">
+          <li class="page_location_name located l">L</li>
+          <li class="city_item">黎平</li>
+          <li class="city_item">龙岩</li>
+          <li class="city_item">临汾</li>
+          <li class="city_item">兰州</li>
+          <li class="city_item">丽江</li>
+          <li class="city_item">荔波</li>
+          <li class="city_item">吕梁</li>
+          <li class="city_item">临沧</li>
+          <li class="city_item">六盘水</li>
+          <li class="city_item">拉萨</li>
+          <li class="city_item">林西县</li>
+          <li class="city_item">洛阳</li>
+          <li class="city_item">连云港</li>
+          <li class="city_item">临沂</li>
+          <li class="city_item">柳州</li>
+          <li class="city_item">泸州</li>
+          <li class="city_item">林芝</li>
+        </ul>
+        <ul class="city_firstLetter_item">
+          <li class="page_location_name located m">M</li>
+          <li class="city_item">芒市</li>
+          <li class="city_item">牡丹江</li>
+          <li class="city_item">绵阳</li>
+          <li class="city_item">梅县</li>
+          <li class="city_item">满洲里</li>
+          <li class="city_item">漠河</li>
+        </ul>
+        <ul class="city_firstLetter_item">
+          <li class="page_location_name located n">N</li>
+          <li class="city_item">南昌</li>
+          <li class="city_item">南充</li>
+          <li class="city_item">宁波</li>
+          <li class="city_item">南京</li>
+          <li class="city_item">宁蒗</li>
+          <li class="city_item">那拉提</li>
+          <li class="city_item">南宁</li>
+          <li class="city_item">南阳</li>
+          <li class="city_item">南通</li>
+        </ul>
+        <ul class="city_firstLetter_item">
+          <li class="page_location_name located p">P</li>
+          <li class="city_item">攀枝花</li>
+        </ul>
+        <ul class="city_firstLetter_item">
+          <li class="page_location_name located q">Q</li>
+          <li class="city_item">琼海</li>
+          <li class="city_item">秦皇岛</li>
+          <li class="city_item">庆阳</li>
+          <li class="city_item">黔江</li>
+          <li class="city_item">泉州</li>
+          <li class="city_item">衢州</li>
+          <li class="city_item">齐齐哈尔</li>
+          <li class="city_item">青岛</li>
+        </ul>
+        <ul class="city_firstLetter_item">
+          <li class="page_location_name located r">R</li>
+          <li class="city_item">日照</li>
+          <li class="city_item">日喀则</li>
+        </ul>
+        <ul class="city_firstLetter_item">
+          <li class="page_location_name located s">S</li>
+          <li class="city_item">神农架</li>
+          <li class="city_item">上海</li>
+          <li class="city_item">沈阳</li>
+          <li class="city_item">石河子</li>
+          <li class="city_item">石家庄</li>
+          <li class="city_item">上饶</li>
+          <li class="city_item">三明市</li>
+          <li class="city_item">三亚</li>
+          <li class="city_item">深圳</li>
+          <li class="city_item">十堰</li>
+          <li class="city_item">邵阳</li>
+          <li class="city_item">松原</li>
+        </ul>
+        <ul class="city_firstLetter_item">
+          <li class="page_location_name located t">T</li>
+          <li class="city_item">台州</li>
+          <li class="city_item">塔城</li>
+          <li class="city_item">腾冲</li>
+          <li class="city_item">铜仁</li>
+          <li class="city_item">通辽</li>
+          <li class="city_item">天水</li>
+          <li class="city_item">吐鲁番</li>
+          <li class="city_item">通化</li>
+          <li class="city_item">天津</li>
+          <li class="city_item">唐山</li>
+          <li class="city_item">太原</li>
+        </ul>
+        <ul class="city_firstLetter_item">
+          <li class="page_location_name located w">W</li>
+          <li class="city_item">乌兰浩特</li>
+          <li class="city_item">乌兰察布</li>
+          <li class="city_item">乌鲁木齐</li>
+          <li class="city_item">潍坊</li>
+          <li class="city_item">威海</li>
+          <li class="city_item">文山</li>
+          <li class="city_item">温州</li>
+          <li class="city_item">乌海</li>
+          <li class="city_item">武汉</li>
+          <li class="city_item">武夷山</li>
+          <li class="city_item">无锡</li>
+          <li class="city_item">梧州</li>
+          <li class="city_item">万州</li>
+        </ul>
+        <ul class="city_firstLetter_item">
+          <li class="page_location_name located x">X</li>
+          <li class="city_item">兴义</li>
+          <li class="city_item">夏河</li>
+          <li class="city_item">西双版纳</li>
+          <li class="city_item">忻州</li>
+          <li class="city_item">襄阳</li>
+          <li class="city_item">西昌</li>
+          <li class="city_item">锡林浩特</li>
+          <li class="city_item">西安</li>
+          <li class="city_item">厦门</li>
+          <li class="city_item">西宁</li>
+          <li class="city_item">徐州</li>
+        </ul>
+        <ul class="city_firstLetter_item">
+          <li class="page_location_name located y">Y</li>
+          <li class="city_item">延安</li>
+          <li class="city_item">银川</li>
+          <li class="city_item">伊春</li>
+          <li class="city_item">永州</li>
+          <li class="city_item">榆林</li>
+          <li class="city_item">宜宾</li>
+          <li class="city_item">运城</li>
+          <li class="city_item">宜春</li>
+          <li class="city_item">宜昌</li>
+          <li class="city_item">伊宁</li>
+          <li class="city_item">义乌</li>
+          <li class="city_item">营口</li>
+          <li class="city_item">延吉</li>
+          <li class="city_item">烟台</li>
+          <li class="city_item">盐城</li>
+          <li class="city_item">扬州</li>
+          <li class="city_item">玉树</li>
+        </ul>
+        <ul class="city_firstLetter_item">
+          <li class="page_location_name located z">Z</li>
+          <li class="city_item">郑州</li>
+          <li class="city_item">张家界</li>
+          <li class="city_item">舟山</li>
+          <li class="city_item">张掖</li>
+          <li class="city_item">昭通</li>
+          <li class="city_item">中山</li>
+          <li class="city_item">湛江</li>
+          <li class="city_item">中卫</li>
+          <li class="city_item">张家口</li>
+          <li class="city_item">珠海</li>
+          <li class="city_item">遵义</li>
+        </ul>
+      </ul>
+    </div>
+    <div class="filter_container" style="display: none;">
+      <ul></ul>
+    </div>
+    <div class="archor-pop" style="display: none;"></div>
+  </div>
+
+  <script>
+    var ins = watcher('.city_firstLetter_item', {
+      proportion: { dir: 1, size: 0, select: 1, ratio: 1 }
+    })
+      .on('check', function (el, els) {
+        $('.page_location_name_special')
+          .text($(el).find('.page_location_name').text())
+      })
+
+    var archor = $('.archor-pop')
+
+    // 添加事件 - 首字母滑动索引
+
+    $('.firstLetter_container')
+      .on('touchmove', function (e) {
+        var touch = e.changedTouches[0],
+          elem = document.elementFromPoint(touch.pageX, touch.pageY);
+
+        if (!elem) return;
+
+        if ($(elem).parent().hasClass('firstLetter_container')) {
+          var selector = $(elem).text().toLowerCase();
+
+          if (!selector) return;
+
+          var $selector = $('.' + selector)
+
+          if ($selector.length === 0) return;
+
+          ins.scroll($selector[0])
+
+          archor.text(selector.toUpperCase()).fadeIn()
+        }
+      });
+
+    $('.firstLetter_container li').on('click', function (e) {
+      var selector = $(this).text().toLowerCase();
+
+      if (!selector) return;
+
+      var $selector = $('.' + selector)
+
+      if ($selector.length === 0) return;
+
+      ins.scroll($selector[0])
+
+      archor.text(selector.toUpperCase()).fadeIn()
+    })
+
+    $('html')
+      .on('touchend', function (e) {
+        archor.fadeOut()
+      })
+  </script>
+</body>
+
+</html>

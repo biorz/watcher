@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>test</title>
+
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <style>
+    .w {
+      width: 100px;
+      height: 100px;
+      outline: 1px solid red;
+      margin-bottom: 20px;
+    }
+
+    .w.active {
+      background-color: red;
+    }
+
+    #watch {
+      position: fixed;
+      width: 100px;
+      right: 20px;
+      top: 20px;
+      font-size: 0;
+      background-color: white;
+    }
+
+    #watch a {
+      display: inline-block;
+      padding: 5px;
+      width: 5px;
+      height: 5px;
+      border: 1px solid blue;
+
+      margin-left: -1px;
+      margin-top: -1px;
+    }
+
+    #watch a.active {
+      background-color: blue
+    }
+
+    .scroll {
+      height: 300px;
+      outline: 1px solid green;
+      overflow: scroll;
+    }
+  </style>
+  <script src="../lib/watcher.min.js"></script>
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+
+    <div class="scroll">
+      <div class="w"></div>
+      <div class="w"></div>
+      <div class="w"></div>
+      <div class="w"></div>
+      <div class="w"></div>
+      <div class="w"></div>
+      <div class="w"></div>
+      <div class="w"></div>
+      <div class="w"></div>
+      <div class="w"></div>
+      <div class="w"></div>
+      <div class="w"></div>
+      <div class="w"></div>
+      <div class="w"></div>
+    </div>
+
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+  </div>
+
+  <div id="watch"></div>
+
+  <script>
+    var ins = watcher('.w', {
+      proportion: { dir: 1, size: 1, select: 1, ratio: 1},
+      offset: {
+        top: 20
+      },
+      direction: 2
+    })
+    var html = ''
+    var c = 0
+
+    $('.w').each(function () {
+      c++
+      var id = 'i' + Math.random().toString(32).slice(2, 10)
+      html += '<a href="#' + id + '">' + '' + '</a>'
+      $(this).attr('id', id)
+    })
+
+    $('#watch').html(html)
+
+    $('#watch a').on('click', function (e) {
+      e.preventDefault()
+      var selector = $(this).attr('href')
+      ins.scroll(document.querySelector(selector), 300)
+    })
+
+    ins.on('check', (el, els) => {
+      if (els.length) {
+        var id = $(el).attr('id')
+        var watcher = $('[href="#' + id + '"]')
+        $('#watch a').removeClass('active')
+        $('[href="#' + id + '"]').addClass('active')
+        $('.w').removeClass('active')
+        $('#' + id).addClass('active')
+      }
+    })
+      .on('exit', (e) => {
+        console.log(e)
+      })
+  </script>
+</body>
+
+</html>
