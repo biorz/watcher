@@ -21,6 +21,14 @@
       background-color: red;
     }
 
+    .w {
+      transition: all .5s ease 0s;
+    }
+
+    .w.animated {
+      transform: scale(.8) translateX(50px);
+    }
+
     #watch {
       position: fixed;
       width: 100px;
@@ -121,12 +129,19 @@
 
   <script>
     var ins = watcher('.w', {
-      proportion: { dir: 1, size: 1, select: 1, ratio: 1},
-      offset: {
-        top: 20
-      },
+      proportion: { dir: 1, size: 1, select: 1, ratio: 1 },
+      offset: 50,
       direction: 2
     })
+
+    ins.on('enter', function (el) {
+      $(el).addClass('animated')
+    })
+
+    ins.on('exit', function (el) {
+      $(el).removeClass('animated')
+    })
+
     var html = ''
     var c = 0
 
