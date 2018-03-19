@@ -218,7 +218,7 @@ class watcher extends emit {
 
     itera(el => {
       if (!(parent = getScrollParent(el))) {
-        rect2 = self.getOffset(rect, self.vp)
+        rect2 = self.getOffset(rect, self.vp);
         scroll = self.getScroll(rect, rect2, self.html);
         history.push(scroll);
         return false;
@@ -330,9 +330,9 @@ class watcher extends emit {
       left: this.options.offset.left + threshold.width
     };
 
-    let rst = Object.assign({}, rect2)
+    let rst = Object.assign({}, rect2);
     for (let k in offset) {
-      rst[k] += offset[k]
+      rst[k] += offset[k];
     }
     return rst;
   }
@@ -376,9 +376,9 @@ class watcher extends emit {
 
     itera(el => {
       if (!rect) return false;
-  
+
       if (!(parent = getScrollParent(el))) {
-        rect2 = self.getOffset(rect, self.vp)
+        rect2 = self.getOffset(rect, self.vp);
         rect = getOffset(rect, rect2);
         return false;
       }

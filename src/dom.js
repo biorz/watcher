@@ -53,8 +53,4 @@ let getScrollParentItera = (el, callback) => {
   return rst;
 };
 
-export {
-  getScrollParent,
-
-  getOffset
-};
+export { getScrollParent, getOffset };
