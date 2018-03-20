@@ -39,7 +39,6 @@ let getScrollParentItera = (el, callback) => {
 
   while ((cur = curnodes.shift())) {
     parent = getScrollParent(cur);
-
     rst = callback.call(null, cur, parent);
 
     if (!rst) {

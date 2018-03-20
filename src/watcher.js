@@ -381,7 +381,7 @@ class watcher extends emit {
       rect2,
       self = this;
 
-    this.getParentItera(el => {
+    this.getParentItera((el, parent) => {
       if (!parent) {
         rect2 = self.getOffsetRect(rect, self.vp);
         rect = getOffset(rect, rect2);
@@ -390,7 +390,8 @@ class watcher extends emit {
 
       rect2 = parent.getBoundingClientRect();
       rect = getOffset(rect, rect2);
-      return rect;
+      
+      return rect !== 0;
     }, element);
 
     if (rect) {

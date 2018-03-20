@@ -1,5 +1,3 @@
-import { getScrollParent } from "./dom";
-
 export let itera = (fn, first) => {
   let itera = para => {
     let rst = fn(para);
