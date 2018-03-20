@@ -390,7 +390,7 @@ class watcher extends emit {
 
       rect2 = parent.getBoundingClientRect();
       rect = getOffset(rect, rect2);
-      
+
       return rect !== 0;
     }, element);
 

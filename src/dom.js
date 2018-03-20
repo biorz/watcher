@@ -1,4 +1,4 @@
-let getScrollParent = (() => {
+export let getScrollParent = (() => {
   const regex = /(auto|scroll)/;
   const scroll = ["overflow", "overflow-x", "overflow-y"];
 
@@ -23,33 +23,13 @@ let getScrollParent = (() => {
   };
 })();
 
-let getOffset = function(r1, r2) {
-  const w = Math.min(r1.right, r2.right) - Math.max(r1.left, r2.left);
-  const h = Math.min(r1.bottom, r2.bottom) - Math.max(r1.top, r2.top);
+export let getOffset = function(rect, rect2) {
+  const width =
+    Math.min(rect.right, rect2.right) - Math.max(rect.left, rect2.left);
+  const height =
+    Math.min(rect.bottom, rect2.bottom) - Math.max(rect.top, rect2.top);
 
-  return w > 0 && h > 0 ? ((r1.width = w), (r1.height = h), r1) : 0;
+  return width > 0 && height > 0
+    ? ((rect.width = width), (rect.height = height), rect)
+    : 0;
 };
-
-let getScrollParentItera = (el, callback) => {
-  let rsts = [],
-    nodes = [getScrollParent(el)],
-    parent,
-    cur,
-    rst;
-
-  while ((cur = curnodes.shift())) {
-    parent = getScrollParent(cur);
-    rst = callback.call(null, cur, parent);
-
-    if (!rst) {
-      return rsts;
-    }
-
-    rsts.push(rst);
-    nodes.push(parents);
-  }
-
-  return rst;
-};
-
-export { getScrollParent, getOffset };

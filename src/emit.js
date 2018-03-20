@@ -18,7 +18,6 @@ class emit {
     }
 
     let self = this;
-
     let once = function() {
       let argus = [].slice.call(arguments);
 

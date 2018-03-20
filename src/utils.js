@@ -1,15 +1,3 @@
-export let itera = (fn, first) => {
-  let itera = para => {
-    let rst = fn(para);
-
-    if (rst !== false) {
-      return itera(rst);
-    }
-    return false;
-  };
-  return itera(first);
-};
-
 export let RAF =
   window.requestAnimationFrame ||
   function(fn) {
