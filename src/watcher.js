@@ -1,6 +1,6 @@
 import emit from "./emit";
 import { getOffset, getScrollParent } from "./dom";
-import { itera, RAF, tween } from "./utils";
+import { RAF, tween } from "./utils";
 
 const group = { interval: 1000 / 60, list: [] };
 
@@ -81,7 +81,7 @@ class watcher extends emit {
     this.proportion();
 
     this.isHozi = this.options.direction % 2;
-    this.isEnd = (this.options.direction + 3) % 3;
+    this.isEnd = this.options.direction % 3;
 
     this.html = document.querySelector("html");
 
@@ -102,16 +102,14 @@ class watcher extends emit {
     });
 
     this.elements.forEach(element => {
-      itera(el => {
-        if (!(parent = getScrollParent(el))) return false;
+      this.getParentItera((el, parent) => {
+        if (!parent) return false;
 
         if (!~history.indexOf(parent)) {
           history.push(parent);
           parent.addEventListener("scroll", e => {
             self.check();
           });
-
-          return parent;
         }
       }, element);
     });
@@ -190,6 +188,16 @@ class watcher extends emit {
     };
   }
 
+  getParentItera(fn, el) {
+    let parent, rst;
+
+    do {
+      parent = getScrollParent(el);
+      rst = fn(el, parent);
+      el = parent;
+    } while (parent && rst !== false);
+  }
+
   scroll(element, time) {
     this.select = element;
     this.scrollTo(element, time);
@@ -216,9 +224,9 @@ class watcher extends emit {
       scroll,
       self = this;
 
-    itera(el => {
-      if (!(parent = getScrollParent(el))) {
-        rect2 = self.getOffset(rect, self.vp);
+    this.getParentItera((el, parent) => {
+      if (!parent) {
+        rect2 = self.getOffsetRect(rect, self.vp);
         scroll = self.getScroll(rect, rect2, self.html);
         history.push(scroll);
         return false;
@@ -235,7 +243,6 @@ class watcher extends emit {
       };
 
       history.push(scroll);
-      return parent;
     }, element);
 
     history.forEach(scroll => {
@@ -317,7 +324,7 @@ class watcher extends emit {
     };
   }
 
-  getOffset(rect, rect2) {
+  getOffsetRect(rect, rect2) {
     const threshold = {
       width: this.options.threshold * rect.width,
       height: this.options.threshold * rect.height
@@ -374,18 +381,16 @@ class watcher extends emit {
       rect2,
       self = this;
 
-    itera(el => {
-      if (!rect) return false;
-
-      if (!(parent = getScrollParent(el))) {
-        rect2 = self.getOffset(rect, self.vp);
+    this.getParentItera(el => {
+      if (!parent) {
+        rect2 = self.getOffsetRect(rect, self.vp);
         rect = getOffset(rect, rect2);
         return false;
       }
 
       rect2 = parent.getBoundingClientRect();
       rect = getOffset(rect, rect2);
-      return parent;
+      return rect;
     }, element);
 
     if (rect) {
