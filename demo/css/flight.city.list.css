@@ -67,6 +67,7 @@ img {
   display: inline-block;
   width: 0.14rem;
   height: 0.25rem;
+  background: url("//m.lvmama.com/flight/image/pointer.png") 0 0 no-repeat;
   background-size: 100%;
   margin-left: 0.1rem;
 }
@@ -256,7 +257,8 @@ html {
   box-pack: space-between;
 }
 .city_container {
-  width: 100%;
+  margin: 0 auto;
+  width: 375px;
   height: 100%;
   position: relative;
   box-sizing: border-box;
@@ -284,6 +286,9 @@ html {
   right: .2rem;
   top: 20%;
   z-index: 3;
+}
+.city_container .firstLetter_container li {
+  cursor: pointer;
 }
 .city_container .city_list_container {
   width: 100%;

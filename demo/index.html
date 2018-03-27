@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style="max-width: 375px; font-size: 50px;">
+<html lang="en" style="font-size: 50px;">
 
 <head>
   <meta charset="UTF-8">
@@ -368,7 +368,8 @@
           .text($(el).find('.page_location_name').text())
       })
 
-    var archor = $('.archor-pop')
+    var archor = $('.archor-pop'),
+      timer;
 
     // 添加事件 - 首字母滑动索引
 
@@ -383,13 +384,10 @@
           var selector = $(elem).text().toLowerCase();
 
           if (!selector) return;
-
           var $selector = $('.' + selector)
 
           if ($selector.length === 0) return;
-
           ins.scroll($selector[0])
-
           archor.text(selector.toUpperCase()).fadeIn()
         }
       });
@@ -398,14 +396,19 @@
       var selector = $(this).text().toLowerCase();
 
       if (!selector) return;
-
       var $selector = $('.' + selector)
 
       if ($selector.length === 0) return;
-
       ins.scroll($selector[0])
-
       archor.text(selector.toUpperCase()).fadeIn()
+
+      clearTimeout(timer)
+
+      timer = setTimeout(function() {
+        if(archor.is(':visible')) {
+          archor.fadeOut()
+        }
+      }, 500);
     })
 
     $('html')
