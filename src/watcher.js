@@ -1,6 +1,5 @@
 import emit from "./emit";
-import { getOffset, getScrollParent } from "./dom";
-import { RAF, tween } from "./utils";
+import { getOffset, getScrollParent, RAF, tween } from "./utils";
 
 const group = { interval: 1000 / 60, list: [] };
 
@@ -167,7 +166,6 @@ class watcher extends emit {
 
   proportion() {
     let p = this.options.proportion;
-
     for (let k in p) {
       this.options.proportion[k] = typeof p[k] === "number" ? p[k] : null;
     }

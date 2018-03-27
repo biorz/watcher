@@ -1,3 +1,3 @@
-import watcher from './watcher';
+import watcher from "./watcher";
 
 export default watcher;
